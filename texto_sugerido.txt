@@ -1,0 +1,13 @@
+# Tipo de Instrucción:
+# I = Instrucción Normal.
+# ES n= Instrucción E/S que se desbloqueará dentro n pasos de CPU.
+# Ocurrirá cuando haya cambio de proceso en la CPU, antes de cargar
+# nuevo proceso.
+# F=Finalizar.
+#Nro Instrucción Tipo de Instrucción
+1 I
+2 I
+3 ES 7
+4 I
+5 I
+6 F
