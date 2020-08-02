@@ -2,58 +2,58 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <vector>
+#include <stdio.h>
+#include <stdlib.h>
 using namespace std;
 
-int main( int argc, char* argv[] ){
+int main( int argc, char* argv[]){
 
 
-	ifstream inStream;
-	ofstream outStream;
-for(int i=1; i < argc; i++){
-    cout  << endl << argv[i];
-    fstream f;
-    f.open(argv[i]);
+	//ifstream inStream;
+	//ofstream outStream;
 
+	//VARIABLES QUE ME PERMITIRAN CREAR ARCHIVO EN RUTA DESEADA
+        /*FILE* orginalFile = fopen(argv[1], "r");
+    	FILE* newFile = fopen(argv[2], "w");
 
-    //inStream.open("menu1.txt");
-   // inStream.open("menu2.txt");
-    string n[10];
-    double p[10];
+    	if (orginalFile == NULL || newFile == NULL) {
+      		printf("Cannot open file");
+    	}*/
 
+	    FILE* filein = stdin;
+    FILE* fileout = stdout;
 
-    // ifstream m1("menu1.txt");
-   //ifstream m2("menu2.txt");
-
-
-    string name;
-    double var;
-
-    string line;
-    istringstream iss(line);
-
-    short loop=0;
-    if(f.is_open()){
-
-        while(!f.eof()){
-            iss >> name >> var;
-            getline(f, line);
-            while(f>>name>>var){
-                n[loop]=name;
-                p[loop]=var;
-                cout << endl << "Item at index " << loop << " " << n[loop];
-                cout << endl << "Cost at index " << loop << " " << p[loop];
-                loop++;
-            }
-
-        }
-        cout << endl;
-
-    f.close();
+    if(argc > 1) {
+        filein = fopen(argv[1], "r");
+    }
+    if(argc > 2) {
+        fileout = fopen(argv[2], "w");
     }
 
+	string linea;
+	ifstream inputfile;
+	inputfile.open("texto_sugerido.txt");
 
-}
 
 
-return 0;
+	while (!inputfile.eof()) 
+     	{
+     		getline(inputfile,linea);
+
+     		if (linea.length() == 0 || linea[0] == '#')
+     		{
+			cout << "IGNORANDO COMENTARIOS\n";}
+     		else
+     		{
+			cout << linea << "\n";
+		}
+
+     	}// End While
+
+
+	inputfile.close();
+
+
+	return 0;
 }
