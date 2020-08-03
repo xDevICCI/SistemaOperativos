@@ -21,33 +21,48 @@ int main( int argc, char* argv[]){
       		printf("Cannot open file");
     	}*/
 
-	    FILE* filein = stdin;
-    FILE* fileout = stdout;
+	FILE* filein = stdin;
+    	FILE* fileout = stdout;
 
-    if(argc > 1) {
-        filein = fopen(argv[1], "r");
-    }
-    if(argc > 2) {
-        fileout = fopen(argv[2], "w");
-    }
+	int n=0;
+	int p=0;
+
+	if(argc > 1){
+		n = argv[1];
+	}
+	if(argc > 2){
+		p = argv[2];
+	}
+    	if(argc > 3) {
+        	filein = fopen(argv[3], "r");
+    	}
+    	if(argc > 4) {
+        	fileout = fopen(argv[4], "w");
+    	}
 
 	string linea;
 	ifstream inputfile;
 	inputfile.open("texto_sugerido.txt");
 
+	//VARIABLES DE EJEMPLOS PARA PROBAR Y BUSCAR INSTRUCCION ES
+	char* search = "ES";
+	int offset;
 
+	unsigned int posicionLinea=0;
+	//FINAL COMENTARIO
+	string s;
+	ifstream in(argv[2]); 
 
-	while (!inputfile.eof()) 
+	while (!inputfile.eof() &&  getline(inputfile,linea,'#')) 
      	{
-     		getline(inputfile,linea);
-
-     		if (linea.length() == 0 || linea[0] == '#')
-     		{
-			cout << "IGNORANDO COMENTARIOS\n";}
-     		else
-     		{
-			cout << linea << "\n";
+     		//cout << linea;
+		posicionLinea++;
+		getline(inputfile,linea);
+		if( (offset = linea.find(search,0)) != string::npos  )
+		{
+			cout << "encontrado: " << search << endl;
 		}
+		
 
      	}// End While
 
