@@ -24,8 +24,8 @@ int main( int argc, char* argv[]){
 	FILE* filein = stdin;
     	FILE* fileout = stdout;
 
-	int n=0;
-	int p=0;
+	char* n;
+	char* p;
 
 	if(argc > 1){
 		n = argv[1];
@@ -34,10 +34,14 @@ int main( int argc, char* argv[]){
 		p = argv[2];
 	}
     	if(argc > 3) {
-        	filein = fopen(argv[3], "r");
+        	std::ifstream ifs;
+		ifs.open ( argv[3], std::ifstream::in | std::ifstream::app );
+		ifs.close();
     	}
     	if(argc > 4) {
-        	fileout = fopen(argv[4], "w");
+        	std::ofstream ofs;
+		ofs.open ( argv[4], std::ofstream::out | std::ofstream::app );
+		ofs.close();
     	}
 
 	string linea;
@@ -45,24 +49,29 @@ int main( int argc, char* argv[]){
 	inputfile.open("texto_sugerido.txt");
 
 	//VARIABLES DE EJEMPLOS PARA PROBAR Y BUSCAR INSTRUCCION ES
-	char* search = "ES";
+	char* search = "ES 7";
+	char* efe = "F";
+
 	int offset;
 
 	unsigned int posicionLinea=0;
 	//FINAL COMENTARIO
 	string s;
-	ifstream in(argv[2]); 
+	ifstream in(argv[4]); 
 
 	while (!inputfile.eof() &&  getline(inputfile,linea,'#')) 
      	{
      		//cout << linea;
 		posicionLinea++;
-		getline(inputfile,linea);
+		getline(inputfile,linea,'#');
 		if( (offset = linea.find(search,0)) != string::npos  )
 		{
-			cout << "encontrado: " << search << endl;
+			cout << "encontrado: " << search << posicionLinea << endl;
+			if( (offset = linea.find(efe,0) ) != string::npos ){
+				//AQUI DEBE HABER UNA FUNCION O ALGORITMO DE ARCHIVO CREACION DE PROCESOS
+				exit(0);
+			}
 		}
-		
 
      	}// End While
 
